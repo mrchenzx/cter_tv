@@ -1,0 +1,74 @@
+name: Fetch Live Channels
+
+# 触发方式：手动 + 每天北京时间0点运行（UTC时间16点，需转换时区）
+on:
+  workflow_dispatch:  # 手动触发（优先测试用）
+  schedule:
+    # cron格式：分 时 日 月 周（UTC时间）
+    # 北京时间0点 = UTC时间前一天16点 → 写为 0 16 * * *
+    - cron: '0 16 * * *'  
+
+jobs:
+  fetch-channels:
+    runs-on: ubuntu-latest
+    # 关键：授予写入仓库内容的权限（解决push失败）
+    permissions:
+      contents: write  
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        # 拉取完整仓库历史，避免push冲突
+        with:
+          fetch-depth: 0  
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          # 缓存npm依赖（如果脚本有依赖，加速运行）
+          cache: 'npm'  
+
+      - name: 安装脚本依赖（如果有）
+        run: |
+          # 若fetch-channels.js依赖package.json，执行npm install
+          if [ -f package.json ]; then
+            npm install
+            echo "✅ 依赖安装完成"
+          else
+            echo "ℹ️ 无package.json，跳过依赖安装"
+          fi
+
+      - name: Run fetch channels script
+        run: |
+          # 运行脚本并输出日志，方便排查问题
+          echo "🚀 开始运行fetch-channels.js脚本"
+          node fetch-channels.js
+          # 校验output.json是否生成
+          if [ -f output.json ]; then
+            echo "✅ 脚本运行成功，output.json已生成"
+            # 打印文件前10行，确认内容（可选）
+            head -10 output.json
+          else
+            echo "❌ 脚本运行失败，未生成output.json"
+            exit 1  # 终止工作流，标记失败
+          fi
+
+      - name: Commit and push changes
+        run: |
+          # 配置Git身份（固定写法）
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          
+          # 拉取最新代码（避免推送冲突）
+          git pull origin main --rebase
+          
+          # 添加文件并检查变更
+          git add output.json
+          if git diff --staged --quiet; then
+            echo "ℹ️ 无文件变更，无需提交"
+          else
+            git commit -m "Update live channels $(date +'%Y-%m-%d %H:%M:%S') [skip ci]"
+            git push
+            echo "✅ output.json已成功推送到仓库"
+          fi
