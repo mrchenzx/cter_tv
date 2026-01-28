@@ -11,7 +11,7 @@
     {"id": 9, "url": "https://live.zbds.top/tv/iptv4.txt"}
   ],
   "cctv_channels": {
-    "free_terrestrial_channel": [
+    "CCTV": [
       {"name": "CCTV-1"},
       {"name": "CCTV-2"},
       {"name": "CCTV-3"},
@@ -32,7 +32,7 @@
       {"name": "CCTV-17"},
       {"name": "CCTV-18"}
     ],
-    "donghua_region": [
+    "donghua": [
       {"name": "金鹰卡通‌"},
       {"name": "卡酷动画"},
       {"name": "炫动卡通"},
@@ -40,20 +40,16 @@
       {"name": "优漫卡通"}
     ]
   },
-  "provincial_satellite_channel": {
+  "weishi": {
     "huabei_region": [
       {"name": "北京卫视"},
       {"name": "天津卫视"},
       {"name": "河北卫视"},
       {"name": "山西卫视"},
-      {"name": "内蒙古卫视"}
-    ],
-    "dongbei_region": [
+      {"name": "内蒙古卫视"},
       {"name": "辽宁卫视"},
       {"name": "吉林卫视"},
-      {"name": "黑龙江卫视"}
-    ],
-    "huadong_region": [
+      {"name": "黑龙江卫视"},
       {"name": "上海东方卫视"},
       {"name": "江苏卫视"},
       {"name": "浙江卫视"},
@@ -61,33 +57,25 @@
       {"name": "福建东南卫视"},
       {"name": "江西卫视"},
       {"name": "山东卫视"},
-      {"name": "上海炫动卡通卫视"}
-    ],
-    "zhongnan_region": [
+      {"name": "上海炫动卡通卫视"},
       {"name": "河南卫视"},
       {"name": "湖北卫视"},
       {"name": "湖南卫视"},
       {"name": "广东卫视"},
       {"name": "广东南方卫视"},
       {"name": "广西卫视"},
-      {"name": "海南卫视"}
-    ],
-    "xinan_region": [
+      {"name": "海南卫视"},
       {"name": "重庆卫视"},
       {"name": "四川卫视"},
       {"name": "贵州卫视"},
       {"name": "云南卫视"},
-      {"name": "西藏卫视"}
-    ],
-    "xibei_region": [
+      {"name": "西藏卫视"},
       {"name": "陕西卫视"},
       {"name": "甘肃卫视"},
       {"name": "青海卫视"},
       {"name": "宁夏卫视"},
       {"name": "新疆卫视"},
-      {"name": "新疆生产建设兵团卫视"}
-    ],
-    "characteristic_city_channel": [
+      {"name": "新疆生产建设兵团卫视"},
       {"name": "深圳卫视"},
       {"name": "厦门卫视"}
     ]
