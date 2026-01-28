@@ -1,0 +1,16 @@
+{
+  "name": "dy-tv-fetch-channels",
+  "version": "1.0.0",
+  "description": "Fetch and match live TV channels from M3U subscriptions",
+  "main": "fetch-channels.js",
+  "scripts": {
+    "start": "node fetch-channels.js"
+  },
+  "keywords": [
+    "m3u",
+    "iptv",
+    "channels"
+  ],
+  "author": "",
+  "license": "MIT"
+}
