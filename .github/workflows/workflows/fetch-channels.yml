@@ -1,0 +1,36 @@
+name: Fetch Live Channels
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  fetch-channels:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+        working-directory: ./main
+      
+      - name: Run fetch channels script
+        run: node fetch-channels.js
+        working-directory: ./main
+      
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add output.json
+          git diff --staged --quiet || git commit -m "Update live channels [skip ci]"
+          git push
