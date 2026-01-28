@@ -120,61 +120,162 @@ function fuzzyMatch(channelName, targetNames) {
   return false;
 }
 
-function getAllChannelNames(channelData) {
-  const names = [];
+function matchChannels(m3uChannels, channelData) {
+  const result = {
+    cctv_channels: {
+      free_terrestrial_channel: [],
+      donghua_region: []
+    },
+    provincial_satellite_channel: {
+      huabei_region: [],
+      dongbei_region: [],
+      huadong_region: [],
+      zhongnan_region: [],
+      xinan_region: [],
+      xibei_region: [],
+      characteristic_city_channel: []
+    },
+    digital_paid_channel: []
+  };
   
   if (channelData.cctv_channels) {
     if (channelData.cctv_channels.free_terrestrial_channel) {
-      channelData.cctv_channels.free_terrestrial_channel.forEach(ch => names.push(ch.name));
+      channelData.cctv_channels.free_terrestrial_channel.forEach(ch => {
+        const matchedSources = matchChannelSources(ch.name, m3uChannels);
+        if (matchedSources.length > 0) {
+          result.cctv_channels.free_terrestrial_channel.push({
+            name: ch.name,
+            sources: [...new Set(matchedSources)]
+          });
+        }
+      });
     }
     if (channelData.cctv_channels.donghua_region) {
-      channelData.cctv_channels.donghua_region.forEach(ch => names.push(ch.name));
+      channelData.cctv_channels.donghua_region.forEach(ch => {
+        const matchedSources = matchChannelSources(ch.name, m3uChannels);
+        if (matchedSources.length > 0) {
+          result.cctv_channels.donghua_region.push({
+            name: ch.name,
+            sources: [...new Set(matchedSources)]
+          });
+        }
+      });
     }
   }
   
   if (channelData.provincial_satellite_channel) {
-    Object.values(channelData.provincial_satellite_channel).forEach(region => {
-      region.forEach(ch => names.push(ch.name));
-    });
+    if (channelData.provincial_satellite_channel.huabei_region) {
+      channelData.provincial_satellite_channel.huabei_region.forEach(ch => {
+        const matchedSources = matchChannelSources(ch.name, m3uChannels);
+        if (matchedSources.length > 0) {
+          result.provincial_satellite_channel.huabei_region.push({
+            name: ch.name,
+            sources: [...new Set(matchedSources)]
+          });
+        }
+      });
+    }
+    if (channelData.provincial_satellite_channel.dongbei_region) {
+      channelData.provincial_satellite_channel.dongbei_region.forEach(ch => {
+        const matchedSources = matchChannelSources(ch.name, m3uChannels);
+        if (matchedSources.length > 0) {
+          result.provincial_satellite_channel.dongbei_region.push({
+            name: ch.name,
+            sources: [...new Set(matchedSources)]
+          });
+        }
+      });
+    }
+    if (channelData.provincial_satellite_channel.huadong_region) {
+      channelData.provincial_satellite_channel.huadong_region.forEach(ch => {
+        const matchedSources = matchChannelSources(ch.name, m3uChannels);
+        if (matchedSources.length > 0) {
+          result.provincial_satellite_channel.huadong_region.push({
+            name: ch.name,
+            sources: [...new Set(matchedSources)]
+          });
+        }
+      });
+    }
+    if (channelData.provincial_satellite_channel.zhongnan_region) {
+      channelData.provincial_satellite_channel.zhongnan_region.forEach(ch => {
+        const matchedSources = matchChannelSources(ch.name, m3uChannels);
+        if (matchedSources.length > 0) {
+          result.provincial_satellite_channel.zhongnan_region.push({
+            name: ch.name,
+            sources: [...new Set(matchedSources)]
+          });
+        }
+      });
+    }
+    if (channelData.provincial_satellite_channel.xinan_region) {
+      channelData.provincial_satellite_channel.xinan_region.forEach(ch => {
+        const matchedSources = matchChannelSources(ch.name, m3uChannels);
+        if (matchedSources.length > 0) {
+          result.provincial_satellite_channel.xinan_region.push({
+            name: ch.name,
+            sources: [...new Set(matchedSources)]
+          });
+        }
+      });
+    }
+    if (channelData.provincial_satellite_channel.xibei_region) {
+      channelData.provincial_satellite_channel.xibei_region.forEach(ch => {
+        const matchedSources = matchChannelSources(ch.name, m3uChannels);
+        if (matchedSources.length > 0) {
+          result.provincial_satellite_channel.xibei_region.push({
+            name: ch.name,
+            sources: [...new Set(matchedSources)]
+          });
+        }
+      });
+    }
+    if (channelData.provincial_satellite_channel.characteristic_city_channel) {
+      channelData.provincial_satellite_channel.characteristic_city_channel.forEach(ch => {
+        const matchedSources = matchChannelSources(ch.name, m3uChannels);
+        if (matchedSources.length > 0) {
+          result.provincial_satellite_channel.characteristic_city_channel.push({
+            name: ch.name,
+            sources: [...new Set(matchedSources)]
+          });
+        }
+      });
+    }
   }
   
   if (channelData.digital_paid_channel) {
-    channelData.digital_paid_channel.forEach(ch => names.push(ch.name));
+    channelData.digital_paid_channel.forEach(ch => {
+      const matchedSources = matchChannelSources(ch.name, m3uChannels);
+      if (matchedSources.length > 0) {
+        result.digital_paid_channel.push({
+          name: ch.name,
+          sources: [...new Set(matchedSources)]
+        });
+      }
+    });
   }
   
-  return names;
+  return result;
 }
 
-function matchChannels(m3uChannels, channelData) {
-  const result = [];
-  const allChannelNames = getAllChannelNames(channelData);
+function matchChannelSources(channelName, m3uChannels) {
+  const matchedSources = [];
+  const possibleNames = [channelName];
   
-  allChannelNames.forEach(channelName => {
-    const matchedSources = [];
-    const possibleNames = [channelName];
-    
-    const numberMatch = channelName.match(/(\d+)/);
-    if (numberMatch) {
-      const num = numberMatch[1];
-      possibleNames.push(channelName.replace(num, '-' + num));
-      possibleNames.push(channelName.replace(num, num));
-    }
-    
-    for (const [m3uChannelName, sources] of Object.entries(m3uChannels)) {
-      if (fuzzyMatch(m3uChannelName, possibleNames)) {
-        matchedSources.push(...sources);
-      }
-    }
-    
-    if (matchedSources.length > 0) {
-      result.push({
-        name: channelName,
-        sources: [...new Set(matchedSources)]
-      });
-    }
-  });
+  const numberMatch = channelName.match(/(\d+)/);
+  if (numberMatch) {
+    const num = numberMatch[1];
+    possibleNames.push(channelName.replace(num, '-' + num));
+    possibleNames.push(channelName.replace(num, num));
+  }
   
-  return result;
+  for (const [m3uChannelName, sources] of Object.entries(m3uChannels)) {
+    if (fuzzyMatch(m3uChannelName, possibleNames)) {
+      matchedSources.push(...sources);
+    }
+  }
+  
+  return matchedSources;
 }
 
 async function main() {
@@ -228,16 +329,38 @@ async function main() {
     console.log('匹配频道...');
     const matchedChannels = matchChannels(allM3UChannels, channelData);
     
-    console.log(`成功匹配 ${matchedChannels.length} 个频道`);
+    let totalMatched = 0;
+    Object.values(matchedChannels.cctv_channels).forEach(region => {
+      totalMatched += region.length;
+    });
+    Object.values(matchedChannels.provincial_satellite_channel).forEach(region => {
+      totalMatched += region.length;
+    });
+    totalMatched += matchedChannels.digital_paid_channel.length;
+    
+    console.log(`成功匹配 ${totalMatched} 个频道`);
     
     console.log('写入输出文件...');
     fs.writeFileSync(outputJsonPath, JSON.stringify(matchedChannels, null, 2), 'utf8');
     
     console.log(`完成！结果已保存到 ${outputJsonPath}`);
     
-    matchedChannels.forEach(ch => {
-      console.log(`${ch.name}: ${ch.sources.length} 个直播源`);
-    });
+    const logChannel = (channels) => {
+      channels.forEach(ch => {
+        console.log(`${ch.name}: ${ch.sources.length} 个直播源`);
+      });
+    };
+    
+    logChannel(matchedChannels.cctv_channels.free_terrestrial_channel);
+    logChannel(matchedChannels.cctv_channels.donghua_region);
+    logChannel(matchedChannels.provincial_satellite_channel.huabei_region);
+    logChannel(matchedChannels.provincial_satellite_channel.dongbei_region);
+    logChannel(matchedChannels.provincial_satellite_channel.huadong_region);
+    logChannel(matchedChannels.provincial_satellite_channel.zhongnan_region);
+    logChannel(matchedChannels.provincial_satellite_channel.xinan_region);
+    logChannel(matchedChannels.provincial_satellite_channel.xibei_region);
+    logChannel(matchedChannels.provincial_satellite_channel.characteristic_city_channel);
+    logChannel(matchedChannels.digital_paid_channel);
     
   } catch (err) {
     console.error('错误:', err);
