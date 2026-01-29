@@ -5,12 +5,11 @@ const fsPromises = fs.promises;
 const readline = require('readline');
 const path = require('path');
 
-// 路径配置
+// 路径配置（移除 completedFlagPath 定义）
 const channelJsonPath = path.join(__dirname, 'channel.json');
 const outputJsonPath = path.join(path.dirname(__dirname), 'output.json');
 const tempDir = path.join(path.dirname(__dirname), 'temp_subscriptions');
 const progressJsonPath = path.join(path.dirname(__dirname), 'progress.json');
-const completedFlagPath = path.join(__dirname, '.completed'); // Actions完成标记文件
 
 // 配置常量
 const MAX_CHANNELS_PER_RUN = 5; // 每次运行最多处理5个频道
@@ -512,16 +511,10 @@ async function processBatchChannels(channelData, tempFiles) {
 }
 
 /**
- * 主函数（核心修改：循环处理直到所有频道完成）
+ * 主函数（核心修改：移除.completed检测，每次都完整执行）
  */
 async function main() {
   try {
-    // 0. 检查是否已完成所有处理（适配Actions）
-    if (await fsPromises.access(completedFlagPath).then(() => true).catch(() => false)) {
-      console.log('🎉 所有频道已处理完成，直接退出');
-      process.exit(0);
-    }
-
     // 1. 初始化目录（增加权限容错）
     try {
       if (!fs.existsSync(tempDir)) {
@@ -609,17 +602,9 @@ async function main() {
       }
     }
 
-    // 8. 所有频道处理完成，清理并标记完成
+    // 8. 所有频道处理完成（仅提示，不创建标记/删除文件）
     console.log('\n🎉 所有频道处理完成！');
-    // 创建完成标记文件（适配Actions）
-    await fsPromises.writeFile(completedFlagPath, JSON.stringify({ 
-      completed: true, 
-      time: new Date().toISOString() 
-    }), 'utf8').catch(err => console.warn(`创建完成标记失败: ${err.message}`));
-    // 删除进度文件和标记文件
-    await fsPromises.unlink(progressJsonPath).catch(() => {});
-    await fsPromises.unlink(TEMP_FILE_FLAG).catch(() => {});
-    console.log('✅ 已删除进度配置文件和下载标记');
+    console.log('ℹ️  下次运行将重新初始化进度并再次处理所有频道');
 
     console.log('\n' + '='.repeat(60));
     console.log('✅ 全部处理流程完成！');
