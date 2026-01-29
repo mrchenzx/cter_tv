@@ -6,7 +6,7 @@ on:
     - cron: '0 5 * * *' # 北京时间每天13点触发（UTC 5点 = 北京时间13点）
 
 permissions:
-  contents: write
+  contents: write # 赋予写入代码的权限，确保能提交output.json
 
 # 禁止并发运行，避免冲突
 concurrency:
@@ -22,7 +22,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 0 # 拉取完整仓库历史，确保提交成功
       
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -38,16 +38,32 @@ jobs:
       - name: Run fetch channels script
         run: node fetch-channels.js
         working-directory: ./main
+        env:
+          NODE_ENV: production # 可选：设置生产环境，优化执行
+      
+      # 确保output.json存在（兜底检查）
+      - name: Verify output.json exists
+        run: |
+          if [ -f "../output.json" ]; then
+            echo "✅ output.json已成功创建"
+            cat ../output.json # 可选：打印文件内容，便于调试
+          else
+            echo "❌ output.json创建失败"
+            exit 1
+          fi
+        working-directory: ./main
       
       - name: Commit and push changes
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
+          # 检查output.json是否有变更
           if git diff --quiet output.json; then
             echo "✅ output.json无变更，无需提交"
           else
             git add output.json
-            git commit -m "Update live channels [skip ci]"
+            git commit -m "Update live channels: $(date +'%Y-%m-%d %H:%M:%S') [skip ci]"
+            # 重试推送，避免网络问题
             git push || (sleep 5 && git push) || (sleep 10 && git push)
-            echo "✅ 已推送更新到仓库"
+            echo "✅ output.json已推送至仓库"
           fi
