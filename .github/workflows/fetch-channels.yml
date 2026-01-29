@@ -47,9 +47,6 @@ jobs:
         run: node fetch-channels.js
         working-directory: ./main
       
-      - name: Check and filter sources
-        run: node check-sources.js
-        working-directory: ./main
       
       - name: Commit and push changes
         run: |
