@@ -4,7 +4,8 @@
   "description": "Fetch and match live TV channels from M3U subscriptions",
   "main": "fetch-channels.js",
   "scripts": {
-    "start": "node fetch-channels.js"
+    "start": "node fetch-channels.js",
+    "check": "node check-sources.js"
   },
   "keywords": [
     "m3u",

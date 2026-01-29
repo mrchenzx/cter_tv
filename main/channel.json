@@ -10,86 +10,98 @@
     {"id": 8, "url": "https://d.h6room.com/frjzb.txt"},
     {"id": 9, "url": "https://live.zbds.top/tv/iptv4.txt"}
   ],
-  "cctv_channels": {
-    "CCTV": [
-      {"name": "CCTV-1"},
-      {"name": "CCTV-2"},
-      {"name": "CCTV-3"},
-      {"name": "CCTV-4"},
-      {"name": "CCTV-5"},
-      {"name": "CCTV-5+"},
-      {"name": "CCTV-6"},
-      {"name": "CCTV-7"},
-      {"name": "CCTV-8"},
-      {"name": "CCTV-9"},
-      {"name": "CCTV-10"},
-      {"name": "CCTV-11"},
-      {"name": "CCTV-12"},
-      {"name": "CCTV-13"},
-      {"name": "CCTV-14"},
-      {"name": "CCTV-15"},
-      {"name": "CCTV-16"},
-      {"name": "CCTV-17"},
-      {"name": "CCTV-18"}
+    "cctv_channels": {
+    "free_terrestrial_channel": [
+      {"name": ["CCTV-1", "cctv1", "cctv-1", "CCTV1", "CCTV-1综合", "CCTV1综合"]},
+      {"name": ["CCTV-2", "cctv2", "cctv-2", "CCTV2", "CCTV-2财经", "CCTV2财经"]},
+      {"name": ["CCTV-3", "cctv3", "cctv-3", "CCTV3", "CCTV-3综艺", "CCTV3综艺"]},
+      {"name": ["CCTV-4", "cctv4", "cctv-4", "CCTV4", "CCTV-4中文国际", "CCTV4中文国际"]},
+      {"name": ["CCTV-5", "cctv5", "cctv-5", "CCTV5", "CCTV-5体育", "CCTV5体育"]},
+      {"name": ["CCTV-5+", "cctv5+", "cctv-5+", "CCTV5+", "CCTV-5+体育", "CCTV5+体育"]},
+      {"name": ["CCTV-6", "cctv6", "cctv-6", "CCTV6", "CCTV-6电影", "CCTV6电影"]},
+      {"name": ["CCTV-7", "cctv7", "cctv-7", "CCTV7", "CCTV-7国防军事", "CCTV7国防军事"]},
+      {"name": ["CCTV-8", "cctv8", "cctv-8", "CCTV8", "CCTV-8电视剧", "CCTV8电视剧"]},
+      {"name": ["CCTV-9", "cctv9", "cctv-9", "CCTV9", "CCTV-9纪录", "CCTV9纪录"]},
+      {"name": ["CCTV-10", "cctv10", "cctv-10", "CCTV10", "CCTV-10科教", "CCTV10科教"]},
+      {"name": ["CCTV-11", "cctv11", "cctv-11", "CCTV11", "CCTV-11戏曲", "CCTV11戏曲"]},
+      {"name": ["CCTV-12", "cctv12", "cctv-12", "CCTV12", "CCTV-12社会与法", "CCTV12社会与法"]},
+      {"name": ["CCTV-13", "cctv13", "cctv-13", "CCTV13", "CCTV-13新闻", "CCTV13新闻"]},
+      {"name": ["CCTV-14", "cctv14", "cctv-14", "CCTV14", "CCTV-14少儿", "CCTV14少儿"]},
+      {"name": ["CCTV-15", "cctv15", "cctv-15", "CCTV15", "CCTV-15音乐", "CCTV15音乐"]},
+      {"name": ["CCTV-16", "cctv16", "cctv-16", "CCTV16", "CCTV-16奥运", "CCTV16奥运"]},
+      {"name": ["CCTV-17", "cctv17", "cctv-17", "CCTV17", "CCTV-17农业", "CCTV17农业"]},
+      {"name": ["CCTV-18", "cctv18", "cctv-18", "CCTV18", "CCTV-18超高清", "CCTV18超高清"]}
     ],
-    "donghua": [
-      {"name": "金鹰卡通‌"},
-      {"name": "卡酷动画"},
-      {"name": "炫动卡通"},
-      {"name": "嘉佳卡通"},
-      {"name": "优漫卡通"}
+    "donghua_region": [
+      {"name": ["金鹰卡通‌", "金鹰卡通"]},
+      {"name": ["卡酷动画", "卡酷少儿"]},
+      {"name": ["炫动卡通", "炫动少儿"]},
+      {"name": ["嘉佳卡通", "嘉佳少儿"]},
+      {"name": ["优漫卡通", "优漫少儿"]}
     ]
   },
-  "weishi": {
+  "provincial_satellite_channel": {
     "huabei_region": [
-      {"name": "北京卫视"},
-      {"name": "天津卫视"},
-      {"name": "河北卫视"},
-      {"name": "山西卫视"},
-      {"name": "内蒙古卫视"},
-      {"name": "辽宁卫视"},
-      {"name": "吉林卫视"},
-      {"name": "黑龙江卫视"},
-      {"name": "上海东方卫视"},
-      {"name": "江苏卫视"},
-      {"name": "浙江卫视"},
-      {"name": "安徽卫视"},
-      {"name": "福建东南卫视"},
-      {"name": "江西卫视"},
-      {"name": "山东卫视"},
-      {"name": "上海炫动卡通卫视"},
-      {"name": "河南卫视"},
-      {"name": "湖北卫视"},
-      {"name": "湖南卫视"},
-      {"name": "广东卫视"},
-      {"name": "广东南方卫视"},
-      {"name": "广西卫视"},
-      {"name": "海南卫视"},
-      {"name": "重庆卫视"},
-      {"name": "四川卫视"},
-      {"name": "贵州卫视"},
-      {"name": "云南卫视"},
-      {"name": "西藏卫视"},
-      {"name": "陕西卫视"},
-      {"name": "甘肃卫视"},
-      {"name": "青海卫视"},
-      {"name": "宁夏卫视"},
-      {"name": "新疆卫视"},
-      {"name": "新疆生产建设兵团卫视"},
-      {"name": "深圳卫视"},
-      {"name": "厦门卫视"}
+      {"name": ["北京卫视"]},
+      {"name": ["天津卫视"]},
+      {"name": ["河北卫视"]},
+      {"name": ["山西卫视"]},
+      {"name": ["内蒙古卫视"]}
+    ],
+    "dongbei_region": [
+      {"name": ["辽宁卫视"]},
+      {"name": ["吉林卫视"]},
+      {"name": ["黑龙江卫视"]}
+    ],
+    "huadong_region": [
+      {"name": ["上海东方卫视", "东方卫视"]},
+      {"name": ["江苏卫视"]},
+      {"name": ["浙江卫视"]},
+      {"name": ["安徽卫视"]},
+      {"name": ["福建东南卫视", "东南卫视"]},
+      {"name": ["江西卫视"]},
+      {"name": ["山东卫视"]},
+      {"name": ["上海炫动卡通卫视", "炫动卡通卫视"]}
+    ],
+    "zhongnan_region": [
+      {"name": ["河南卫视"]},
+      {"name": ["湖北卫视"]},
+      {"name": ["湖南卫视"]},
+      {"name": ["广东卫视"]},
+      {"name": ["广东南方卫视", "南方卫视"]},
+      {"name": ["广西卫视"]},
+      {"name": ["海南卫视"]}
+    ],
+    "xinan_region": [
+      {"name": ["重庆卫视"]},
+      {"name": ["四川卫视"]},
+      {"name": ["贵州卫视"]},
+      {"name": ["云南卫视"]},
+      {"name": ["西藏卫视"]}
+    ],
+    "xibei_region": [
+      {"name": ["陕西卫视"]},
+      {"name": ["甘肃卫视"]},
+      {"name": ["青海卫视"]},
+      {"name": ["宁夏卫视"]},
+      {"name": ["新疆卫视"]},
+      {"name": ["新疆生产建设兵团卫视", "兵团卫视"]}
+    ],
+    "characteristic_city_channel": [
+      {"name": ["深圳卫视"]},
+      {"name": ["厦门卫视"]}
     ]
   },
   "digital_paid_channel": [
-    {"name": "CCTV风云足球"},
-    {"name": "CCTV风云音乐"},
-    {"name": "CCTV怀旧剧场"},
-    {"name": "CCTV女性时尚"},
-    {"name": "CCTV兵器科技"},
-    {"name": "CCTV老故事"},
-    {"name": "CCTV发现之旅"},
-    {"name": "CCTV世界地理"},
-    {"name": "CCTV第一剧场"},
-    {"name": "CCTV央视文化精品"}
+    {"name": ["CCTV风云足球"]},
+    {"name": ["CCTV风云音乐"]},
+    {"name": ["CCTV怀旧剧场"]},
+    {"name": ["CCTV女性时尚"]},
+    {"name": ["CCTV兵器科技"]},
+    {"name": ["CCTV老故事"]},
+    {"name": ["CCTV发现之旅"]},
+    {"name": ["CCTV世界地理"]},
+    {"name": ["CCTV第一剧场"]},
+    {"name": ["CCTV央视文化精品"]}
   ]
 }
