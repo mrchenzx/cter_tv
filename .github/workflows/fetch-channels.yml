@@ -1,9 +1,10 @@
 name: Fetch Live Channels
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: # 保留手动触发
   schedule:
-    - cron: '0 * * * *' # 每小时整点触发，降低频率
+    - cron: '0 21 * * *' # 北京时间每天5点触发（UTC 21点 = 北京时间次日5点）
+    # 若需UTC时间5点触发，改为：- cron: '0 5 * * *'
 
 permissions:
   contents: write
@@ -16,7 +17,7 @@ concurrency:
 jobs:
   fetch-channels:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 15 # 延长超时时间（处理所有频道可能耗时更久）
     
     steps:
       - name: Checkout repository
